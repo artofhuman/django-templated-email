@@ -1,3 +1,4 @@
+from six import string_types
 from django.conf import settings
 from django.utils.importlib import import_module
 from django.core.exceptions import ImproperlyConfigured
@@ -15,7 +16,7 @@ def get_connection(backend=None, template_prefix=None, template_suffix=None,
     """
     # This method is mostly a copy of the backend loader present in django.core.mail.get_connection
     klass_path = backend or getattr(settings, 'TEMPLATED_EMAIL_BACKEND', TemplateBackend)
-    if isinstance(klass_path, basestring):
+    if isinstance(klass_path, string_types):
         try:
             # First check if class name is omited and we have module in settings
             mod = import_module(klass_path)
