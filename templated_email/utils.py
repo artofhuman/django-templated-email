@@ -9,6 +9,12 @@ class BlockNotFound(Exception):
 
 
 def _get_node(template, context=Context(), name='subject', block_lookups={}):
+    
+    try:
+        xrange
+    except NameError:
+        xrange = range
+        
     for node in template:
         if isinstance(node, BlockNode) and node.name == name:
             #Rudimentary handling of extended templates, for issue #3
